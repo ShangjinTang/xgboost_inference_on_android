@@ -2,6 +2,10 @@
 
 **This project is under Apache 2.0 License.**
 
+## App Inference Demo
+
+<img src="Screenshots/Prediction_A.jpg" alt="prediction sample" width="50%">
+
 ## Train
 
 XGBoostClassifier with Iris dataset
