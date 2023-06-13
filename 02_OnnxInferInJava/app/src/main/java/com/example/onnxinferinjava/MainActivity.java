@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         InputStream modelInputStream = getResources().openRawResource(R.raw.xgbc_iris);
         ModelRunner modelRunner = null;
         try {
-            modelRunner = new ModelRunner(modelInputStream, inputData.length, 1);
+            modelRunner = new ModelRunner(modelInputStream, inputData.length);
 //            float[] inputData = {5.7f, 3.8f, 1.7f, 0.3f};
 //            float[] inputData = {6.1f, 2.8f, 4.7f, 1.2f};
 //            float[] inputData = {7.7f, 2.6f, 6.9f, 2.3f};
@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
             return (int) modelRunner.runInference(inputData);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            modelRunner.close();
         }
     }
 }
