@@ -16,16 +16,8 @@ py_binary(
         requirement("skl2onnx"),
         requirement("scikit-learn"),
         requirement("xgboost"),
+        requirement("numpy"),
+        requirement("onnxruntime"),
+        requirement("onnxmltools"),
     ],
 )
-
-# py_test(
-#     name = "test_main",
-#     srcs = ["train.py"],
-#     main = "train.py",
-#     deps = [
-#         requirement("skl2onnx"),
-#         requirement("scikit-learn"),
-#         requirement("xgboost"),
-#     ],
-# )

@@ -2,13 +2,20 @@
 
 **This project is under Apache 2.0 License.**
 
+Install `bazelisk`.
+
 ## App Inference Demo
 
 <img src="Screenshots/Prediction_A.jpg" alt="prediction sample" width="50%">
 
 ## Train
 
-XGBoostClassifier with Iris dataset
+XGBoostClassifier with Iris dataset:
+
+```bash
+cd ./xgboost_train
+bazelisk run :train
+```
 
 ## Convert (xgboost to ort)
 
@@ -17,7 +24,7 @@ XGBoostClassifier with Iris dataset
 
 ## Inference (on Android)
 
-OnnxRuntime
+- OnnxRuntime
 
 # Q&A
 
@@ -25,10 +32,28 @@ OnnxRuntime
 
 The Android architecture is not official supported in XGBoost4j.
 
-## Why do not convert to TensorFlow and deploy with TFLite?
+## Why do not convert onnx to TensorFlow and deploy with TFLite?
 
-Because it's impossible as TensorFlow do not implement the XGBoost backend. If you transfer onnx to tf model, you would get this error:
+Because it's impossible as TensorFlow do not implement the XGBoost backend. If you convert onnx to tf model, you would get this convertion error:
 
+Convert code:
+
+```python
+import onnx
+from onnx_tf.backend import prepare
+
+# Load the ONNX model
+onnx_model = onnx.load("xgbc_iris.onnx")
+
+# Convert the ONNX model to TensorFlow format
+tf_model = prepare(onnx_model)
+
+# Save the TensorFlow model
+tf_model.export_graph("xgbc_iris.tf")
 ```
-# Error: "BackendIsNotSupposedToImplementIt: TreeEnsembleClassifier is not implemented."
+
+Convert result (ERROR):
+
+```plain
+Error: "BackendIsNotSupposedToImplementIt: TreeEnsembleClassifier is not implemented."
 ```
