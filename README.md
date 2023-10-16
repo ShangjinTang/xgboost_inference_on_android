@@ -2,29 +2,53 @@
 
 **This project is under Apache 2.0 License.**
 
-Install `bazelisk`.
-
 ## App Inference Demo
 
 <img src="Screenshots/Prediction_A.jpg" alt="prediction sample" width="50%">
 
 ## Train
 
-XGBoostClassifier with Iris dataset:
+Directory: `xgboost_train`.
+
+### Without bazel
+
+Just run `train.ipynb`.
+
+### Using bazel
+
+1. Install `bazelisk`.
+
+You can install `bazelisk` in multiple ways, including:
+
+- `npm install -g @bazel/bazelisk`
+- using [a binary release](https://github.com/bazelbuild/bazelisk/releases) for Linux, macOS, or Windows
+- using Homebrew on macOS
+- by compiling from source using Go: `go get github.com/bazelbuild/bazelisk
+
+2. Run XGBoostClassifier with Iris dataset:
 
 ```bash
 cd ./xgboost_train
 bazelisk run :train
 ```
 
-## Convert (xgboost to ort)
+The output model is under `xgboost_train/bazel-xgboost_train`.
 
-- step 1: xgboost model -> sklearn & xgboost & onnx -> .onnx
-- step 2: .onnx -> .ort
+3. Convert (.onnx to .ort) (optional)
+
+If you need to use `.ort` model, you can convert with:
+
+```bash
+python -m onnxruntime.tools.convert_onnx_models_to_ort <onnx model file or dir>
+```
+
+But for xgboost model, `.ort` model is 2~3 times larger than original `.onnx` model.
 
 ## Inference (on Android)
 
-- OnnxRuntime
+Directory: `onnx_inference`.
+
+Install Android Studio and run the APK.
 
 # Q&A
 
