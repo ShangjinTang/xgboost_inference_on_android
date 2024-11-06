@@ -8,9 +8,18 @@ tar xf onnxruntime-linux-x64-1.20.0.tgz
 mv onnxruntime-linux-x64-1.20.0.tgz onnxruntime
 ```
 
-## Run
+## Run Inference
+
+### Static
 
 ```bash
 export LD_LIBRARY_PATH=./onnxruntime/lib
-clang++ -O0 -g -std=c++20 -Wall -Wextra -Wpedantic -ldl -o a.out main.cc -I./onnxruntime/include/ -L./onnxruntime/lib -lonnxruntime && ./a.out
+clang++ -O0 -g -std=c++20 -Wall -Wextra -Wpedantic -ldl -o a.out main_static.cc -I./onnxruntime/include/ -L./onnxruntime/lib -lonnxruntime && ./a.out
+```
+
+### Dynamic
+
+```bash
+unset LD_LIBRARY_PATH
+clang++ -O0 -g -std=c++20 -Wall -Wextra -Wpedantic -ldl -o a.out main_dynamic.cc -I./onnxruntime/include/ && ./a.out
 ```
